@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sakura Lab - Creamos detalles que florecen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ee2b5b",
+                        "background-light": "#fdfcfb", // Bone White variant
+                        "background-dark": "#221015",
+                        "charcoal": "#333333",
+                        "pastel-pink": "#fce7f3",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .heading-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-charcoal dark:text-gray-100 transition-colors duration-300">
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800">
+    <div class="max-w-[1280px] mx-auto px-6 md:px-10 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-12">
+            <div class="flex items-center gap-2 group cursor-pointer">
+                <div class="text-primary">
+                    <svg fill="none" height="32" viewBox="0 0 48 48" width="32" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M39.5563 34.1455V13.8546C39.5563 15.708 36.8773 17.3437 32.7927 18.3189C30.2914 18.916 27.263 19.2655 24 19.2655C20.737 19.2655 17.7086 18.916 15.2073 18.3189C11.1227 17.3437 8.44365 15.708 8.44365 13.8546V34.1455C8.44365 35.9988 11.1227 37.6346 15.2073 38.6098C17.7086 39.2069 20.737 39.5564 24 39.5564C27.1288 39.5564 30.2914 39.2069 32.7927 38.6098C36.8773 37.6346 39.5563 35.9988 39.5563 34.1455Z" fill="currentColor"></path>
+                    <path clip-rule="evenodd" d="M10.4485 13.8519C10.4749 13.9271 10.6203 14.246 11.379 14.7361C12.298 15.3298 13.7492 15.9145 15.6717 16.3735C18.0007 16.9296 20.8712 17.2655 24 17.2655C27.1288 17.2655 29.9993 16.9296 32.3283 16.3735C34.2508 15.9145 35.702 15.3298 36.621 14.7361C37.3796 14.246 37.5251 13.9271 37.5515 13.8519C37.5287 13.7876 37.4333 13.5973 37.0635 13.2931C36.5266 12.8516 35.6288 12.3647 34.343 11.9175C31.79 11.0295 28.1333 10.4437 24 10.4437C19.8667 10.4437 16.2099 11.0295 13.657 11.9175C12.3712 12.3647 11.4734 12.8516 10.9365 13.2931C10.5667 13.5973 10.4713 13.7876 10.4485 13.8519ZM37.5563 18.7877C36.3176 19.3925 34.8502 19.8839 33.2571 20.2642C30.5836 20.9025 27.3973 21.2655 24 21.2655C20.6027 21.2655 17.4164 20.9025 14.7429 20.2642C13.1498 19.8839 11.6824 19.3925 10.4436 18.7877V34.1275C10.4515 34.1545 10.5427 34.4867 11.379 35.027C12.298 35.6207 13.7492 36.2054 15.6717 36.6644C18.0007 37.2205 20.8712 37.5564 24 37.5564C27.1288 37.5564 29.9993 37.2205 32.3283 36.6644C34.2508 36.2054 35.702 35.6207 36.621 35.027C37.4573 34.4867 37.5485 34.1546 37.5563 34.1275V18.7877ZM41.5563 13.8546V34.1455C41.5563 36.1078 40.158 37.5042 38.7915 38.3869C37.3498 39.3182 35.4192 40.0389 33.2571 40.5551C30.5836 41.1934 27.3973 41.5564 24 41.5564C20.6027 41.5564 17.4164 41.1934 14.7429 40.5551C12.5808 40.0389 10.6502 39.3182 9.20848 38.3869C7.84205 37.5042 6.44365 36.1078 6.44365 34.1455L6.44365 13.8546C6.44365 12.2684 7.37223 11.0454 8.39581 10.2036C9.43325 9.3505 10.8137 8.67141 12.343 8.13948C15.4203 7.06909 19.5418 6.44366 24 6.44366C28.4582 6.44366 32.5797 7.06909 35.657 8.13948C37.1863 8.67141 38.5667 9.3505 39.6042 10.2036C40.6278 11.0454 41.5563 12.2684 41.5563 13.8546Z" fill="currentColor" fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+            <h2 class="text-charcoal dark:text-white text-xl font-bold tracking-tight">Sakura Lab</h2>
+            
+            </div>
+
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="text-charcoal/70 dark:text-white/70 hover:text-primary transition-colors text-sm font-medium" href="#">Inicio</a>
+                <a class="text-charcoal/70 dark:text-white/70 hover:text-primary transition-colors text-sm font-medium" href="#">Catálogo</a>
+                <a class="text-charcoal/70 dark:text-white/70 hover:text-primary transition-colors text-sm font-medium" href="#">Procesos</a>
+                <a class="text-charcoal/70 dark:text-white/70 hover:text-primary transition-colors text-sm font-medium" href="#">Nosotros</a>
+            </nav>
+        </div>
+        
+        <div class="flex items-center gap-6">
+            <div class="flex items-center bg-gray-100 dark:bg-white/10 rounded-full px-4 py-2 border border-transparent focus-within:border-primary/30 focus-within:bg-white transition-all">
+                <span class="material-symbols-outlined text-gray-400 text-[20px]">search</span>
+                <input class="bg-transparent border-none focus:ring-0 text-sm w-48 placeholder:text-gray-400" placeholder="Buscar regalo ideal..." type="text"/>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<main>
+    <section class="relative overflow-hidden pt-10 pb-20 md:py-24">
+        <div class="max-w-[1280px] mx-auto px-6 md:px-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1 flex flex-col gap-8">
+                    <div class="flex flex-col gap-4">
+                        <span class="text-primary font-bold uppercase tracking-widest text-xs">Artesanía &amp; Tecnología</span>
+                        <h1 class="heading-serif text-charcoal dark:text-white text-5xl md:text-7xl leading-[1.1] font-medium italic">
+                            Sakura Lab: <br/>
+                            <span class="not-italic font-bold">detalles que florecen</span>
+                        </h1>
+                        
+                        <p class="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-lg leading-relaxed">
+                            Personalizamos tus momentos especiales con tecnología 3D, grabado láser de alta precisión y sublimación artesanal.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <button class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg font-bold text-base transition-all shadow-lg shadow-primary/20 flex items-center gap-2">
+                            Diseñar algo único
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    
+                        <button class="bg-white dark:bg-white/5 border border-gray-200 dark:border-gray-800 hover:border-primary/50 text-charcoal dark:text-white px-8 py-4 rounded-lg font-bold text-base transition-all">
+                            Ver Galería
+                        </button>
+                    </div>
+                </div>
+            <div class="order-1 lg:order-2 relative">
+                <div class="aspect-square rounded-3xl overflow-hidden shadow-2xl bg-pastel-pink">
+                    <div class="w-full h-full bg-cover bg-center transition-transform hover:scale-105 duration-700" data-alt="Modern 3D printed vase with minimalist floral arrangement" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC6neIGaBgNsZ3pu12BA39GJdfoncl3ppGQkdvsJVtgsEY9j9uFSdt4tmmzBwr9I3Dg21L9dH7dMsUlBgbprfXKvKwpRzUm2lFNaj9S0iUcvf6GDpikNFbPfAr1tgbcsnCMpJEJQvNDrMV98FwiCFoHGMREC_GiLRSBKWetRoZ0XiROSCTqg-H8Ue4BCQTJ9jxKCD38frtuuAOAiDVKBPVQ_pXZ3jw2SA5vj0q0wgIXlJq1epTUChB99XvQVt6bGTc63Vxa5Fp4qto');">
+                    </div>
+                </div>
+                <div class="absolute -bottom-6 -left-6 bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-800 hidden md:flex items-center gap-4">
+                    <div class="bg-primary/10 p-3 rounded-full text-primary">
+                        <span class="material-symbols-outlined">verified</span>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-wide text-gray-400">Calidad Premium</p>
+                        <p class="text-sm font-bold">Acabados de Lujo</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    
+<section class="py-12 border-y border-gray-100 dark:border-gray-800 bg-white/30">
+<div class="max-w-[1280px] mx-auto px-6 md:px-10">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+<div class="flex items-start gap-4">
+<div class="text-primary bg-primary/10 p-4 rounded-xl">
+<span class="material-symbols-outlined text-[32px]">edit_note</span>
+</div>
+<div>
+<h3 class="font-bold text-lg mb-1">Diseño Personalizado</h3>
+<p class="text-sm text-gray-500">Transformamos tus ideas en objetos físicos con precisión milimétrica.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="text-primary bg-primary/10 p-4 rounded-xl">
+<span class="material-symbols-outlined text-[32px]">eco</span>
+</div>
+<div>
+<h3 class="font-bold text-lg mb-1">Materiales Sostenibles</h3>
+<p class="text-sm text-gray-500">Utilizamos bioplásticos PLA y maderas certificadas para un menor impacto.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="text-primary bg-primary/10 p-4 rounded-xl">
+<span class="material-symbols-outlined text-[32px]">local_shipping</span>
+</div>
+<div>
+<h3 class="font-bold text-lg mb-1">Envíos Cuidados</h3>
+<p class="text-sm text-gray-500">Embalaje premium protector para que tus detalles lleguen perfectos.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24">
+<div class="max-w-[1280px] mx-auto px-6 md:px-10">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+<div class="flex flex-col gap-4">
+<h2 class="heading-serif text-4xl font-bold dark:text-white">Nuestras Categorías</h2>
+<p class="text-gray-500 max-w-md">Explora nuestra selección de técnicas para crear el regalo perfecto.</p>
+</div>
+<a class="text-primary font-bold flex items-center gap-2 hover:underline" href="#">
+                    Ver todo el catálogo
+                    <span class="material-symbols-outlined text-sm">arrow_outward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden mb-4 shadow-md group-hover:shadow-xl transition-all duration-500">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="Close up of a 3D printing nozzle working on a pink object" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), transparent), url('https://lh3.googleusercontent.com/aida-public/AB6AXuC6IA1nrmfIbq0prvWHs2Ir4mD6AHRCYkFD1MVRXWiVfbmN-YNNDoAUoDM18a-SY2KckshXmFsIJ_Kc4oDlahojDsOZAeB1tMmgYZ9pWTop6HkoN9JnfHTU_RmUmmhJeQwBJ7eBKLT9DweCX81zvjVtLQv7abzlXbx7ZTkCDkB_U_EbY9I3_7GuEx3DFYTweBnzxRLbNIgpBrb18TyraGk5U2EeNYd0ga1XtN546ZC-N7rI_mWn5Ruh6ZF_yfUNRpQ-aOe0b3iMMKY');">
+</div>
+<div class="absolute bottom-6 left-6 right-6">
+<h3 class="text-white text-2xl font-bold mb-1">Impresiones 3D</h3>
+<p class="text-white/80 text-sm">Esculturas, moldes y prototipos</p>
+</div>
+</div>
+</div>
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden mb-4 shadow-md group-hover:shadow-xl transition-all duration-500">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="Collection of beautifully sublimated ceramic mugs with floral patterns" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), transparent), url('https://lh3.googleusercontent.com/aida-public/AB6AXuBFmUljEyndxo7DhQWudiAHuypCxnwaatub39B9rQY5EfHDdhruboY-Vu0y97cOIuDPGSnzRq1uOZk6rHD8RuBQ4gfskKY0x5TtnfbnmnUXaf5fqnm7hu33Q14Mq9WHMWDkH1NQUoQRHt4satvUgJThJhsJi9bqktAw3vCB85Rf6Tt8xcGp6nKnkj3V6JWHKWGAeiLSJ1ssKlBWM5tsB1envEHwIsKLHrDVMjaot7of1cxu9x18Gpr6ZXUpEHlivxntCYtK7WPCaKQ');">
+</div>
+<div class="absolute bottom-6 left-6 right-6">
+<h3 class="text-white text-2xl font-bold mb-1">Tazas Sublimadas</h3>
+<p class="text-white/80 text-sm">Tus fotos y diseños en cerámica</p>
+</div>
+</div>
+</div>
+<div class="group cursor-pointer">
+<div class="relative aspect-[4/5] rounded-2xl overflow-hidden mb-4 shadow-md group-hover:shadow-xl transition-all duration-500">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" data-alt="Laser engraved wooden jewelry box with intricate patterns" style="background-image: linear-gradient(to top, rgba(0,0,0,0.6), transparent), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWWf95gcwXSGeTEkieT9Pqxc4C0ygsQ8_DPjT0mHamCB04Cuqt8-yTArYO-Kl67dqbo7hj17c_BvpKct4H2N-x85TEGhDYgw5Ld70UT__W5WplUc6JO73Zvcw8OJh6DqLfHxr8HjtuTCCcZxElSsG0-wNbpXd5YCUwnXMRJi-fwtJNNFzFfcKlj2As7mEOuNXGYY9hMR4iiOhr5UN5TSwGkdCm9e4bWj2Dx2uvscZhMiZxCu8ShkUIjVfxYG2hHPDbjfITZgtx7hk');">
+</div>
+<div class="absolute bottom-6 left-6 right-6">
+<h3 class="text-white text-2xl font-bold mb-1">Corte Láser y MDF</h3>
+<p class="text-white/80 text-sm">Decoración y señalética en madera</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-white dark:bg-background-dark pt-20 pb-10 border-t border-gray-100 dark:border-gray-800">
+<div class="max-w-[1280px] mx-auto px-6 md:px-10">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-2">
+<div class="text-primary">
+<span class="material-symbols-outlined text-[32px]">temp_preferences_eco</span>
+</div>
+<h2 class="text-charcoal dark:text-white text-xl font-bold tracking-tight">Sakura Lab</h2>
+</div>
+<p class="text-gray-500 text-sm leading-relaxed">
+                    Creamos objetos con alma, fusionando la tecnología más avanzada con un diseño orgánico y elegante.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-bold mb-6">Explorar</h4>
+<ul class="flex flex-col gap-4 text-sm text-gray-500">
+<li><a class="hover:text-primary transition-colors" href="#">Catálogo Completo</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Nuevos Lanzamientos</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Best Sellers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Regalos Corporativos</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-6">Soporte</h4>
+<ul class="flex flex-col gap-4 text-sm text-gray-500">
+<li><a class="hover:text-primary transition-colors" href="#">Preguntas Frecuentes</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Política de Envíos</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Seguimiento de Pedido</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contacto</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-6">Ubicación</h4>
+<p class="text-sm text-gray-500 mb-4">Visítanos en nuestro showroom creativo.</p>
+<div class="aspect-video rounded-lg overflow-hidden grayscale hover:grayscale-0 transition-all duration-500" data-location="Mexico City" style="">
+<div class="w-full h-full bg-cover bg-center" data-alt="Stylized map showing shop location" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDVRthrDSP_zv8p5C5bBmB7kmGowCImjgoofN8oxT6iZ73JAMxjRBwr5C6yDYX5nZVlCNqZm7OzbZJHAzT9_6X421xaCYjHsfX1uy5Vwbmq4fZp1H1Sdjt3P4c714NE_kS5MBpcIZuc_XH-JwHUtNizlpc_60fiSkS4umzFGC_QYfk4sx1Sa9P2hVrkw5t8cVHdhZvCWlnk-H8MeTA5FFrFou_qNT2-_-9fHRlI0q1Ko15yBG2qwCeSFfvS79SvqtmDLaLYHc4Uf9o');"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-gray-100 dark:border-gray-800 gap-6">
+<p class="text-xs text-gray-400">© 2024 Sakura Lab. Todos los derechos reservados.</p>
+<div class="flex gap-8 text-xs text-gray-400 uppercase tracking-widest font-bold">
+<a class="hover:text-primary" href="#">Privacidad</a>
+<a class="hover:text-primary" href="#">Términos</a>
+<a class="hover:text-primary" href="#">Cookies</a>
+</div>
+</div>
+</div>
+</footer>
+
+</body></html>
