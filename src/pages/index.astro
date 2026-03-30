@@ -11,6 +11,9 @@ const productosDestacados = productosData.filter(producto => producto.data.desta
 
 // Imagen principal del Hero (esta se queda manual porque es estática de diseño)
 import principalImg from '../assets/imgs/principal.jpeg';
+
+// Obtener el número de WhatsApp desde las variables de entorno
+const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER || '593000000000';
 ---
 
 <Layout title="Inicio - Sakura Lab">
@@ -113,10 +116,10 @@ import principalImg from '../assets/imgs/principal.jpeg';
 				<h2 class="font-headline text-3xl md:text-5xl font-bold text-on-secondary-container mb-4 tracking-tighter">¿Tienes un proyecto en mente?</h2>
 				<p class="text-on-secondary-container/80 text-lg max-w-md">Envíanos tus archivos o cuéntanos tu idea para recibir una cotización técnica personalizada.</p>
 			</div>
-			<button class="relative z-10 bg-primary text-on-primary px-10 py-5 font-bold uppercase tracking-widest text-sm flex items-center gap-4 hover:translate-y--1px transition-all shadow-xl active:scale-95">
+			<a href={`https://wa.me/${whatsappNumber}`} target="_blank" class="relative z-10 bg-primary text-on-primary px-10 py-5 font-bold uppercase tracking-widest text-sm flex items-center gap-4 hover:translate-y--1px transition-all shadow-xl active:scale-95">
 				<span class="material-symbols-outlined" data-icon="chat" data-weight="fill">chat</span>
 				Cotizar por WhatsApp
-			</button>
+			</a>
 			<span class="absolute -right-10 -bottom-10 material-symbols-outlined text-on-secondary-container/5 text-[240px] rotate-45 select-none" data-icon="straighten">straighten</span>
 		</section>
 

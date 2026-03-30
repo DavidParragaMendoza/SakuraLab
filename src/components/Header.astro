@@ -1,5 +1,6 @@
 ---
 // Aquí podrías agregar en el futuro props, como por ejemplo enlaces activos, etc.
+const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER || '593000000000';
 ---
 
 <header id="main-header" class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-zinc-200/15 shadow-sm transition-colors duration-300">
@@ -14,9 +15,9 @@
             <a class="text-zinc-600 hover:text-[#D14168] transition-colors" href="/#galeria">Trabajos</a>
             <a class="text-zinc-600 hover:text-[#D14168] transition-colors" href="/#proceso">Proceso</a>
         </nav>
-        <button class="hidden md:flex bg-primary text-on-primary px-5 py-2.5 rounded-sm font-medium hover:translate-y-0.5 transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] active:scale-95 text-sm uppercase tracking-wider">
+        <a href={`https://wa.me/${whatsappNumber}`} target="_blank" class="hidden md:flex bg-primary text-on-primary px-5 py-2.5 rounded-sm font-medium hover:translate-y-0.5 transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] active:scale-95 text-sm uppercase tracking-wider">
             Cotizar por WhatsApp
-        </button>
+        </a>
     </div>
 </header>
 
