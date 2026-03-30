@@ -2,21 +2,37 @@
 // Aquí podrías agregar en el futuro props, como por ejemplo enlaces activos, etc.
 ---
 
-<header class="fixed top-0 w-full z-50 bg-white/70 dark:bg-zinc-950/70 backdrop-blur-xl border-b border-zinc-200/15 dark:border-zinc-800/15 shadow-sm dark:shadow-none">
+<header id="main-header" class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-zinc-200/15 shadow-sm transition-colors duration-300">
     <div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
         <div class="flex items-center gap-2">
             <!-- Nota: En el Paso 5 cambiaremos esto a <Image /> y la imagen local, por ahora dejo tu link original -->
             <img alt="SakuraLab Logo" class="h-8 w-auto" src="../../public/logo.png"/>
-            <span class="text-2xl font-bold tracking-tighter text-[#1A1C1D] dark:text-[#FFFFFF] font-headline">SakuraLab</span>
+            <span class="text-2xl font-bold tracking-tighter text-[#1A1C1D] font-headline">SakuraLab</span>
         </div>
         <nav class="hidden md:flex items-center gap-8 font-headline tracking-tight font-medium">
-            <a class="text-[#D14168] dark:text-[#D14168] border-b-2 border-[#D14168] pb-1" href="#">Inicio</a>
-            <a class="text-zinc-600 dark:text-zinc-400 hover:text-[#D14168] transition-colors" href="#">Trabajos</a>
-            <a class="text-zinc-600 dark:text-zinc-400 hover:text-[#D14168] transition-colors" href="#">Proceso</a>
-            <a class="text-zinc-600 dark:text-zinc-400 hover:text-[#D14168] transition-colors" href="#">Nosotros</a>
+            <a class="text-[#D14168] border-b-2 border-[#D14168] pb-1" href="/">Inicio</a>
+            <a class="text-zinc-600 hover:text-[#D14168] transition-colors" href="/#galeria">Trabajos</a>
+            <a class="text-zinc-600 hover:text-[#D14168] transition-colors" href="/#proceso">Proceso</a>
         </nav>
         <button class="hidden md:flex bg-primary text-on-primary px-5 py-2.5 rounded-sm font-medium hover:translate-y-0.5 transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] active:scale-95 text-sm uppercase tracking-wider">
             Cotizar por WhatsApp
         </button>
     </div>
 </header>
+
+<script>
+    const header = document.getElementById('main-header');
+    
+    // Verificamos que el header exista para evitar errores (texto rojo en tu editor)
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.remove('bg-white/70');
+                header.classList.add('bg-white/95', 'shadow-md');
+            } else {
+                header.classList.remove('bg-white/95', 'shadow-md');
+                header.classList.add('bg-white/70');
+            }
+        });
+    }
+</script>

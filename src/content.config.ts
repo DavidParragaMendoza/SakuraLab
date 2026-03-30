@@ -5,8 +5,11 @@ const productos = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/productos" }),
   schema: ({ image }) => z.object({
     titulo: z.string(),
+    precio: z.number().optional(),
+    descripcion: z.string().optional(),
+    material: z.string().optional(),
+    dimensiones: z.string().optional(),
     categoria: z.string(),
-    descripcionCorta: z.string().optional(),
     imagen: image(),
     claseCSS: z.string().optional(),
     destacado: z.boolean().default(true),

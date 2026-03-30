@@ -26,10 +26,10 @@ import principalImg from '../assets/imgs/principal.jpeg';
 				<p class="text-on-surface-variant text-lg leading-relaxed">
 					Personalizamos tus momentos especiales con tecnología 3D, grabado láser de alta precisión y sublimación artesanal.
 				</p>
-				<button class="group bg-primary text-on-primary px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:translate-y--4px transition-all shadow-lg active:scale-95">
+				<a href="#galeria" class="group bg-primary text-on-primary px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:translate-y--4px transition-all shadow-lg active:scale-95">
 					Diseñar algo único
 					<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
-				</button>
+				</a>
 			</div>
 			<div class="relative">
 				<div class="rounded-[2.5rem] overflow-hidden shadow-2xl">
@@ -51,73 +51,62 @@ import principalImg from '../assets/imgs/principal.jpeg';
 			<div class="max-w-2xl">
 				<div class="flex items-center gap-2 mb-4">
 					<span class="material-symbols-outlined text-primary text-sm" data-icon="straighten" data-weight="fill">straighten</span>
-					<span class="font-label text-xs tracking-[0.2em] uppercase font-bold text-secondary">High-Precision Technical Vitality</span>
+					<span class="font-label text-xs tracking-[0.2em] uppercase font-bold text-secondary">Vitalidad Técnica de Alta Precisión</span>
 				</div>
-				<h2 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter leading-tight text-on-surface">creamos <span class="text-primary italic">detalles</span> que florecen</h2>
+				<h2 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter leading-tight text-on-surface">Creamos <span class="text-primary italic">detalles</span> que florecen</h2>
 			</div>
 			<div class="max-w-sm text-on-surface-variant font-light text-lg leading-relaxed">
 				Transformamos conceptos técnicos en realidades tangibles mediante fabricación aditiva, corte láser y personalización de alta fidelidad.
 			</div>
 		</section>
 
-		<div class="bento-grid">
+		<div id="galeria" class="bento-grid scroll-mt-24">
 			{productosDestacados.map((producto) => (
-				<div class={`${producto.data.claseCSS === 'especial-logo' ? '' : producto.data.claseCSS} group relative overflow-hidden bg-surface-container-low rounded-lg transition-all duration-500`}>
+				<a href={`/productos/${producto.id}`} class={`${producto.data.claseCSS === 'especial-logo' ? '' : producto.data.claseCSS} group relative overflow-hidden bg-surface-container-low rounded-lg transition-all duration-500 block`}>
 					<Image 
 						class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
 						src={producto.data.imagen} 
 						alt={producto.data.titulo} 
 					/>
 					
-					{producto.data.claseCSS === 'especial-logo' ? (
-						<div class="absolute inset-0 bg-white/10 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-							<span class="material-symbols-outlined text-white text-4xl" data-icon="precision_manufacturing">precision_manufacturing</span>
-						</div>
-					) : (
-						<div class="absolute inset-0 bg-linear-to-t from-on-primary-container/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 md:p-8">
-							<span class="text-primary-fixed-dim font-label text-[10px] tracking-[0.2em] uppercase mb-2">
-								{producto.data.categoria}
-							</span>
-							<h3 class={`font-headline font-bold text-white mb-4 ${producto.data.claseCSS === 'item-large' ? 'text-2xl' : 'text-xl'}`}>
-								{producto.data.titulo}
-							</h3>
-							
-							{producto.data.claseCSS === '' ? (
-								<span class="material-symbols-outlined text-white">arrow_forward</span>
-							) : (
-								<button class="w-fit bg-white/20 backdrop-blur-md border border-white/30 text-white px-5 py-2 text-[10px] uppercase tracking-widest font-bold hover:bg-white hover:text-primary transition-all duration-300">
-									Ver más
-								</button>
-							)}
-						</div>
-					)}
-				</div>
+					<div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6 md:p-8">
+						<span class="text-primary font-label text-[10px] tracking-[0.2em] uppercase mb-2 font-bold">
+							{producto.data.categoria}
+						</span>
+						<h3 class={`font-headline font-bold text-white mb-4 ${producto.data.claseCSS === 'item-large' ? 'text-2xl' : 'text-xl'}`}>
+							{producto.data.titulo}
+						</h3>
+						
+						<button class="w-fit bg-white/20 backdrop-blur-md border border-white/30 text-white px-5 py-2 text-[10px] uppercase tracking-widest font-bold hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-2">
+							Ver más
+							<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+						</button>
+					</div>
+				</a>
 			))}
 		</div>
 
-		<section class="mt-32 grid md:grid-cols-3 gap-16 border-t border-outline-variant/15 pt-16">
-			<div class="flex flex-col gap-4">
-				<div class="flex items-center gap-3">
-					<span class="material-symbols-outlined text-primary" data-icon="architecture">architecture</span>
-					<h4 class="font-headline text-xl font-bold">Diseño Milimétrico</h4>
+		<div id="proceso" class="mt-16 lg:mt-24 border-t border-surface-variant pt-10 scroll-mt-24">
+			<h2 class="font-headline text-2xl font-bold text-on-surface mb-6">Proceso de Diseño y Envío</h2>
+			<!-- Componente del proceso -->
+				<div class="grid sm:grid-cols-3 gap-8">
+				<div class="bg-surface-container-low p-6 rounded-lg">
+				<span class="material-symbols-outlined text-3xl text-primary mb-4 block">design_services</span>
+				<h4 class="font-headline font-semibold text-lg text-on-surface mb-2">1. Envía tu Diseño</h4>
+				<p class="text-on-surface-variant text-sm">Aceptamos formatos vectoriales (.ai, .svg, .dxf) o te ayudamos a crear el diseño desde cero.</p>
 				</div>
-				<p class="text-on-surface-variant text-sm leading-relaxed">Cada proyecto es supervisado bajo estrictos estándares de precisión técnica, asegurando que el diseño digital sea idéntico al físico.</p>
-			</div>
-			<div class="flex flex-col gap-4">
-				<div class="flex items-center gap-3">
-					<span class="material-symbols-outlined text-primary" data-icon="temp_preferences_custom">temp_preferences_custom</span>
-					<h4 class="font-headline text-xl font-bold">Materiales de Grado</h4>
+				<div class="bg-surface-container-low p-6 rounded-lg">
+				<span class="material-symbols-outlined text-3xl text-secondary mb-4 block">fact_check</span>
+				<h4 class="font-headline font-semibold text-lg text-on-surface mb-2">2. Aprobación</h4>
+				<p class="text-on-surface-variant text-sm">Te enviaremos un render o boceto técnico para tu aprobación antes de proceder al corte.</p>
 				</div>
-				<p class="text-on-surface-variant text-sm leading-relaxed">Utilizamos filamentos, resinas y sustratos de primera calidad para garantizar durabilidad y acabados estéticos superiores.</p>
-			</div>
-			<div class="flex flex-col gap-4">
-				<div class="flex items-center gap-3">
-					<span class="material-symbols-outlined text-primary" data-icon="speed">speed</span>
-					<h4 class="font-headline text-xl font-bold">Entrega Ágil</h4>
+				<div class="bg-surface-container-low p-6 rounded-lg">
+				<span class="material-symbols-outlined text-3xl text-primary mb-4 block">local_shipping</span>
+				<h4 class="font-headline font-semibold text-lg text-on-surface mb-2">3. Fabricación y Envío</h4>
+				<p class="text-on-surface-variant text-sm">Tiempo de producción estimado de 3-5 días hábiles. Envíos seguros a nivel nacional.</p>
 				</div>
-				<p class="text-on-surface-variant text-sm leading-relaxed">Optimizamos nuestros flujos de trabajo de taller para ofrecer tiempos de respuesta rápidos sin comprometer la integridad del detalle.</p>
 			</div>
-		</section>
+		</div>	
 
 		<section class="mt-32 bg-secondary-container rounded-sm p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 overflow-hidden relative">
 			<div class="relative z-10 text-center md:text-left">
@@ -130,6 +119,8 @@ import principalImg from '../assets/imgs/principal.jpeg';
 			</button>
 			<span class="absolute -right-10 -bottom-10 material-symbols-outlined text-on-secondary-container/5 text-[240px] rotate-45 select-none" data-icon="straighten">straighten</span>
 		</section>
+
+		
 	</main>
 
 	<Footer />
