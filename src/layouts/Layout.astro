@@ -22,14 +22,17 @@ const { title = "Sakura Lab" } = Astro.props;
 		<meta name="keywords" content="impresión 3D, tazas sublimadas, corte láser, Santa Elena, Ecuador, envíos a todo Ecuador, Sakura Lab, regalos personalizados, Angela Gonzalez" />
 		<meta name="author" content="Angela Gonzalez" />
 		<meta name="robots" content="index, follow" />
+		<meta name="image" content="/logo.png" />
+
+		
 		
 		<!-- Open Graph / Redes Sociales -->
+		<meta property="og:site_name" content="Sakura Lab" />
+		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content="Especialistas en impresión 3D, tazas sublimadas y corte láser en Santa Elena, Ecuador. Envíos nacionales." />
-		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="es_EC" />
-		<meta property="og:image" content="/logo.png" />
-		<meta property="og:url" content={Astro.url} />
+		<meta property="og:image" content="https://sakura-lab.vercel.app/logo.png" />
 
 		<!-- Google Fonts e iconos -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
