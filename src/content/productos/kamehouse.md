@@ -11,7 +11,7 @@ dimensiones: 22 cm de alto x 20 cm de ancho x 1.5 cm de grosor.
 
 categoria: Corte lazer
 
-imagen: ../../assets/imgs/kamehouse.png
+imagen: ../../assets/imgs/Kamehouse.png
 
 claseCSS: item-tall
 
