@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
 	title?: string;
@@ -40,5 +41,6 @@ const { title = "Sakura Lab" } = Astro.props;
 	</head>
 	<body class="bg-surface font-body text-on-surface pattern-bg selection:bg-primary-fixed selection:text-on-primary-fixed">
 		<slot />
+		<SpeedInsights />
 	</body>
 </html>
