@@ -1,46 +1,24 @@
-# Astro Starter Kit: Basics
+# Sakura Lab
 
-```sh
-npm create astro@latest -- --template basics
-```
+Sakura Lab es una tienda de regalos personalizados que fusiona artesanía y tecnología. ofrece servicios de impresión 3D, tazas sublimadas y corte láser de alta precisión, transformando conceptos técnicos en realidades tangibles y detalles que florecen.  
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Sakura Lab, dirigido por Angela Gonzalez. Especialistas en impresión 3D, tazas sublimadas y corte láser en Santa Elena, Ecuador. Realizamos envíos a todo el Ecuador .
 
-## 🚀 Project Structure
+## 📱 Redes Sociales
 
-Inside of your Astro project, you'll see the following folders and files:
+- 🎵 [TikTok (@sakuralab.ec)](https://www.tiktok.com/@sakuralab.ec)
+- 📘 [Facebook](https://www.facebook.com/profile.php?id=61586533011989)
+- 📸 [Instagram (@sakuralab.ec)](https://www.instagram.com/sakuralab.ec)
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
 
-## 🧞 Commands
+# 📫Desarollado por: 
+David Parraga Mendoza
 
-All commands are run from the root of the project, from a terminal:
+### Redes:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+* 💼 **LinkedIn:** [David Parraga Mendoza](https://www.linkedin.com/in/davidparragamendoza/)
+* 🐦 **X (Twitter):** [@DavidParragaMen](https://x.com/DavidParragaMen)
 
-## 👀 Want to learn more?
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
