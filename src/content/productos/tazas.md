@@ -9,11 +9,9 @@ material: Cerámica blanca premium. Impresión por sublimación de alta durabili
 
 dimensiones: Capacidad estándar de 11 oz (325 ml). Aproximadamente 9.5 cm de alto x 8.2 cm de diámetro.
 
-categoria: Sublimación 
+categoria: sublimacion
 
-imagen: ../../assets/imgs/tazas_card.jpeg
-claseCSS: item-tall 
-
+imagen: ../../assets/imgs/tazas/tazas_card.jpeg
 
 destacado: true
 ---

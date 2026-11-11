@@ -9,11 +9,9 @@ material: PLA de alta calidad para la litofanía (blanco translúcido de precisi
 
 dimensiones: "Tamaño de la placa de litofanía: 18 cm x 13 cm. Dimensiones totales (con soporte y base): 20 cm (alto) x 14 cm (ancho) x 10 cm (profundidad)."
 
-categoria: Impresión 3D
+categoria: impresion-3d
 
-imagen: ../../assets/imgs/litofania3.jpg
-
-claseCSS: item-tall
+imagen: ../../assets/imgs/litofania/litofania3.jpg
 
 destacado: true
 ---

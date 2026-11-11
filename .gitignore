@@ -1,5 +1,6 @@
 # build output
 dist/
+.vercel/
 
 # generated types
 .astro/
@@ -13,9 +14,18 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# local browser diagnostics
+.chrome-*/
+chrome-*.log
+keystatic-dom.txt
+
 # environment variables
 .env
-.env.production
+.env.*
+!.env.example
+
+# local project context
+CONTEXTO_SAKURALAB.md
 
 # macOS-specific files
 .DS_Store

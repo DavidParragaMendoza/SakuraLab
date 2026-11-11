@@ -9,11 +9,9 @@ material: Plástico PLA (Poliácido láctico) ecológico y biodegradable; cadena
 
 dimensiones: "Largo del pez: 6.5cm ; Ancho máximo: 2.5cm ; Largo total: 11.5 cm"
 
-categoria: Impresión 3D 
+categoria: impresion-3d
 
-imagen: ../../assets/imgs/producto7.jpg
-claseCSS: item-tall 
-
+imagen: ../../assets/imgs/producto7/producto7.jpg
 
 destacado: true
 ---

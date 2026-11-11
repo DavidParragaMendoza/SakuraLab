@@ -5,9 +5,37 @@ import Footer from '../components/Footer.astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 
-// Obtener los productos desde la colección
+// Obtener los productos y categorías desde las colecciones
 const productosData = await getCollection('productos');
+const categoriasData = await getCollection('categorias');
 const productosDestacados = productosData.filter(producto => producto.data.destacado);
+
+// Mapa de slug de categoría -> Nombre legible
+const categoriasMap = new Map<string, string>();
+for (const cat of categoriasData) {
+	categoriasMap.set(cat.id, cat.data.nombre);
+}
+
+// Función para obtener el nombre legible de la categoría de un producto
+const getNombreCategoria = (catSlugOrName: string) => {
+	return categoriasMap.get(catSlugOrName) || catSlugOrName;
+};
+
+// Construir lista de categorías para los botones de filtro (incluyendo las de la colección y cualquier categoría adicional en productos)
+const conteoPorCategoria = new Map<string, number>();
+for (const prod of productosDestacados) {
+	const catKey = prod.data.categoria;
+	conteoPorCategoria.set(catKey, (conteoPorCategoria.get(catKey) || 0) + 1);
+	if (!categoriasMap.has(catKey)) {
+		categoriasMap.set(catKey, catKey);
+	}
+}
+
+const listaCategorias = Array.from(categoriasMap.entries()).map(([slug, nombre]) => ({
+	slug,
+	nombre,
+	count: conteoPorCategoria.get(slug) || 0,
+}));
 
 // Imagen principal del Hero (esta se queda manual porque es estática de diseño)
 import principalImg from '../assets/imgs/principal.jpeg';
@@ -50,7 +78,7 @@ const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER || '593000000000';
 			</div>
 		</section>
 
-		<section class="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-outline-variant/15 pb-12">
+		<section class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-outline-variant/15 pb-10">
 			<div class="max-w-2xl">
 				<div class="flex items-center gap-2 mb-4">
 					<span class="material-symbols-outlined text-primary text-sm" data-icon="straighten" data-weight="fill">straighten</span>
@@ -63,52 +91,146 @@ const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER || '593000000000';
 			</div>
 		</section>
 
-		<div id="galeria" class="bento-grid scroll-mt-24">
-			{productosDestacados.map((producto) => (
-				<a href={`/productos/${producto.id}`} class={`${producto.data.claseCSS === 'especial-logo' ? '' : producto.data.claseCSS} group relative overflow-hidden bg-surface-container-low rounded-lg transition-all duration-500 block`}>
-					<Image 
-						class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-						src={producto.data.imagen} 
-						alt={producto.data.titulo} 
-					/>
-					
-					<div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6 md:p-8">
-						<span class="text-primary font-label text-[10px] tracking-[0.2em] uppercase mb-2 font-bold">
-							{producto.data.categoria}
+		<div id="galeria" class="scroll-mt-24">
+			<!-- Barra de filtros por categoría -->
+			<div class="flex flex-wrap items-center gap-3 mb-10" role="tablist" aria-label="Filtrar trabajos por categoría">
+				<button
+					type="button"
+					data-filter="all"
+					aria-selected="true"
+					class="filter-btn active cursor-pointer px-5 py-2.5 rounded-full font-headline text-sm font-semibold transition-all duration-300 flex items-center gap-2 bg-primary text-on-primary shadow-md"
+				>
+					<span>Todos</span>
+					<span class="text-xs px-2 py-0.5 rounded-full bg-white/20 text-white font-bold">
+						{productosDestacados.length}
+					</span>
+				</button>
+
+				{listaCategorias.map((cat) => (
+					<button
+						type="button"
+						data-filter={cat.slug}
+						aria-selected="false"
+						class="filter-btn cursor-pointer px-5 py-2.5 rounded-full font-headline text-sm font-semibold transition-all duration-300 flex items-center gap-2 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface"
+					>
+						<span>{cat.nombre}</span>
+						<span class="filter-badge text-xs px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-bold transition-colors">
+							{cat.count}
 						</span>
-						<h3 class={`font-headline font-bold text-white mb-4 ${producto.data.claseCSS === 'item-large' ? 'text-2xl' : 'text-xl'}`}>
-							{producto.data.titulo}
-						</h3>
-						
-						<button class="w-fit bg-white/20 backdrop-blur-md border border-white/30 text-white px-5 py-2 text-[10px] uppercase tracking-widest font-bold hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-2">
-							Ver más
-							<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
-						</button>
-					</div>
-				</a>
-			))}
+					</button>
+				))}
+			</div>
+
+			<!-- Cuadrícula simétrica de 3 columnas con imágenes cuadradas (1:1) -->
+			<div id="productos-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+				{productosDestacados.map((producto) => {
+					const nombreCategoria = getNombreCategoria(producto.data.categoria);
+					return (
+						<a
+							href={`/productos/${producto.id}`}
+							data-product-card
+							data-category={producto.data.categoria}
+							class="group relative aspect-square w-full overflow-hidden bg-surface-container-low rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 block"
+						>
+							<Image
+								class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+								src={producto.data.imagen}
+								alt={producto.data.titulo}
+							/>
+
+							<!-- Etiqueta superior de categoría y precio -->
+							<div class="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 z-10 pointer-events-none">
+								<span class="bg-black/60 backdrop-blur-md text-white font-label text-[11px] tracking-[0.15em] uppercase px-3.5 py-1.5 rounded-full font-bold border border-white/15">
+									{nombreCategoria}
+								</span>
+								{producto.data.precio && (
+									<span class="bg-white/90 backdrop-blur-md text-on-surface font-headline text-xs px-3 py-1.5 rounded-full font-bold shadow-sm">
+										${producto.data.precio.toFixed(2)}
+									</span>
+								)}
+							</div>
+
+							<!-- Overlay inferior con efecto hover moderno -->
+							<div class="absolute inset-0 bg-linear-to-t from-black/90 via-black/45 to-transparent opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6 md:p-7">
+								<span class="text-primary-fixed-dim font-label text-[10px] tracking-[0.2em] uppercase mb-1.5 font-bold">
+									{nombreCategoria}
+								</span>
+								<h3 class="font-headline font-bold text-white text-xl leading-snug mb-4 line-clamp-2">
+									{producto.data.titulo}
+								</h3>
+
+								<div class="flex items-center gap-3">
+									<span class="w-fit bg-primary text-on-primary border border-primary/40 px-5 py-2.5 rounded-lg text-[11px] uppercase tracking-widest font-bold group-hover:bg-white group-hover:text-primary transition-all duration-300 flex items-center gap-2 shadow-lg">
+										Ver más / Cotizar
+										<span class="material-symbols-outlined text-[15px] transition-transform duration-300 group-hover:translate-x-1">arrow_forward</span>
+									</span>
+								</div>
+							</div>
+						</a>
+					);
+				})}
+			</div>
+
+			<!-- Estado vacío si se selecciona una categoría nueva sin productos aún -->
+			<div id="empty-category-state" class="hidden py-16 text-center bg-surface-container-low rounded-2xl border border-outline-variant/20">
+				<span class="material-symbols-outlined text-4xl text-primary mb-3 block">inventory_2</span>
+				<h3 class="font-headline text-xl font-bold text-on-surface mb-2">Próximamente nuevos trabajos en esta categoría</h3>
+				<p class="text-on-surface-variant text-sm max-w-md mx-auto">
+					Estamos preparando nuevas muestras de esta categoría. Mientras tanto, puedes cotizar tu idea personalizada directamente por WhatsApp.
+				</p>
+			</div>
 		</div>
 
 		<div id="proceso" class="mt-16 lg:mt-24 border-t border-surface-variant pt-10 scroll-mt-24">
-			<h2 class="font-headline text-2xl font-bold text-on-surface mb-6">Proceso de Diseño y Envío</h2>
-			<!-- Componente del proceso -->
-				<div class="grid sm:grid-cols-3 gap-8">
+			<h2 class="font-headline text-2xl md:text-3xl font-bold text-on-surface mb-3">Cómo Trabajamos: De la Idea a la Entrega</h2>
+			<p class="text-on-surface-variant max-w-2xl mb-8">Te acompañamos en cada etapa para convertir tu idea en una pieza única.</p>
+
+			<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
 				<div class="bg-surface-container-low p-6 rounded-lg">
-				<span class="material-symbols-outlined text-3xl text-primary mb-4 block">design_services</span>
-				<h4 class="font-headline font-semibold text-lg text-on-surface mb-2">1. Envía tu Diseño</h4>
-				<p class="text-on-surface-variant text-sm">Aceptamos formatos vectoriales (.ai, .svg, .dxf) o te ayudamos a crear el diseño desde cero.</p>
+					<span class="material-symbols-outlined text-3xl text-primary mb-4 block">upload_file</span>
+					<h4 class="font-headline font-semibold text-lg text-on-surface mb-2">Paso 1: Envía tu Idea o Archivo</h4>
+					<p class="text-on-surface-variant text-sm leading-relaxed">Recibimos archivos vectoriales (.ai, .svg, .dxf) y modelos 3D (.stl, .obj), o te asesoramos para diseñar tu proyecto personalizado desde cero.</p>
 				</div>
 				<div class="bg-surface-container-low p-6 rounded-lg">
-				<span class="material-symbols-outlined text-3xl text-secondary mb-4 block">fact_check</span>
-				<h4 class="font-headline font-semibold text-lg text-on-surface mb-2">2. Aprobación</h4>
-				<p class="text-on-surface-variant text-sm">Te enviaremos un render o boceto técnico para tu aprobación antes de proceder al corte.</p>
+					<span class="material-symbols-outlined text-3xl text-secondary mb-4 block">fact_check</span>
+					<h4 class="font-headline font-semibold text-lg text-on-surface mb-2">Paso 2: Aprobación y Anticipo (50%)</h4>
+					<p class="text-on-surface-variant text-sm leading-relaxed">Te enviamos el boceto técnico o vista previa digital para tu visto bueno. Todo pedido se agenda y comienza producción formalmente tras confirmar el anticipo del 50%.</p>
 				</div>
 				<div class="bg-surface-container-low p-6 rounded-lg">
-				<span class="material-symbols-outlined text-3xl text-primary mb-4 block">local_shipping</span>
-				<h4 class="font-headline font-semibold text-lg text-on-surface mb-2">3. Fabricación y Envío</h4>
-				<p class="text-on-surface-variant text-sm">Tiempo de producción estimado de 3-5 días hábiles. Envíos seguros a nivel nacional.</p>
+					<span class="material-symbols-outlined text-3xl text-primary mb-4 block">precision_manufacturing</span>
+					<h4 class="font-headline font-semibold text-lg text-on-surface mb-2">Paso 3: Fabricación y Acabados</h4>
+					<p class="text-on-surface-variant text-sm leading-relaxed">Cortamos en láser MDF o imprimimos en 3D cuidando cada detalle y tiempo de postprocesado. Los tiempos de taller estándar van de 3 a 5 días hábiles según la complejidad.</p>
+				</div>
+				<div class="bg-surface-container-low p-6 rounded-lg">
+					<span class="material-symbols-outlined text-3xl text-secondary mb-4 block">local_shipping</span>
+					<h4 class="font-headline font-semibold text-lg text-on-surface mb-2">Paso 4: Control de Calidad y Entrega</h4>
+					<p class="text-on-surface-variant text-sm leading-relaxed">Te enviamos fotos de tu pieza terminada, coordinamos el saldo restante y despachamos mediante entrega local o envíos seguros a nivel nacional.</p>
 				</div>
 			</div>
+
+			<details class="mt-8 rounded-lg border border-primary/20 bg-primary-fixed/30 p-6 group">
+				<summary class="cursor-pointer list-none flex items-center justify-between gap-4 font-headline text-lg font-bold text-on-surface">
+					<span class="flex items-center gap-3">
+						<span class="material-symbols-outlined text-primary">policy</span>
+						Políticas de Pedido y Taller
+					</span>
+					<span class="material-symbols-outlined text-primary transition-transform group-open:rotate-180">expand_more</span>
+				</summary>
+				<div class="mt-6 grid md:grid-cols-3 gap-6 text-sm text-on-surface-variant leading-relaxed">
+					<div>
+						<h4 class="font-headline font-semibold text-on-surface mb-2">Anticipo y Reserva de Cupo</h4>
+						<p>Cada pieza se fabrica bajo demanda. El anticipo del 50% garantiza la compra de material y el turno de máquina en taller; en caso de cancelación una vez iniciada la producción, dicho abono no es reembolsable.</p>
+					</div>
+					<div>
+						<h4 class="font-headline font-semibold text-on-surface mb-2">Fechas de Entrega Fijas</h4>
+						<p>Al confirmar tu pedido se establece una fecha límite de entrega programada. Si requieres adelantar imprevistamente la entrega, dependerá de la disponibilidad en cola y aplicará un recargo por servicio express (+30%).</p>
+					</div>
+					<div>
+						<h4 class="font-headline font-semibold text-on-surface mb-2">Postprocesado y Detalle</h4>
+						<p>Las piezas con pintura, ensamblado complejo o acabados especiales tienen tiempos de curado específicos que se respetan para garantizar la máxima calidad.</p>
+					</div>
+				</div>
+			</details>
 		</div>	
 
 		<section class="mt-32 bg-secondary-container rounded-sm p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10 overflow-hidden relative">
@@ -128,3 +250,66 @@ const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER || '593000000000';
 
 	<Footer />
 </Layout>
+
+<script>
+	const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+	const productCards = document.querySelectorAll<HTMLElement>('[data-product-card]');
+	const emptyState = document.getElementById('empty-category-state');
+
+	filterButtons.forEach((btn) => {
+		btn.addEventListener('click', () => {
+			const selectedCategory = btn.getAttribute('data-filter') || 'all';
+
+			// Actualizar estilos de botones activos/inactivos
+			filterButtons.forEach((b) => {
+				const isSelected = b === btn;
+				b.setAttribute('aria-selected', String(isSelected));
+				const badge = b.querySelector('.filter-badge');
+
+				if (isSelected) {
+					b.classList.remove('bg-surface-container-low', 'text-on-surface-variant', 'hover:bg-surface-container-high', 'hover:text-on-surface');
+					b.classList.add('bg-primary', 'text-on-primary', 'shadow-md');
+					if (badge) {
+						badge.classList.remove('bg-surface-container-highest', 'text-on-surface-variant');
+						badge.classList.add('bg-white/20', 'text-white');
+					}
+				} else {
+					b.classList.add('bg-surface-container-low', 'text-on-surface-variant', 'hover:bg-surface-container-high', 'hover:text-on-surface');
+					b.classList.remove('bg-primary', 'text-on-primary', 'shadow-md');
+					if (badge) {
+						badge.classList.add('bg-surface-container-highest', 'text-on-surface-variant');
+						badge.classList.remove('bg-white/20', 'text-white');
+					}
+				}
+			});
+
+			// Filtrar tarjetas de productos
+			let visibleCount = 0;
+			productCards.forEach((card) => {
+				const cardCategory = card.getAttribute('data-category');
+				const shouldShow = selectedCategory === 'all' || cardCategory === selectedCategory;
+
+				if (shouldShow) {
+					card.classList.remove('hidden');
+					card.classList.remove('animate-card-in');
+					// Forzar reflow para reiniciar la animación suavemente
+					void card.offsetWidth;
+					card.classList.add('animate-card-in');
+					visibleCount++;
+				} else {
+					card.classList.add('hidden');
+					card.classList.remove('animate-card-in');
+				}
+			});
+
+			// Mostrar u ocultar mensaje de categoría vacía
+			if (emptyState) {
+				if (visibleCount === 0) {
+					emptyState.classList.remove('hidden');
+				} else {
+					emptyState.classList.add('hidden');
+				}
+			}
+		});
+	});
+</script>

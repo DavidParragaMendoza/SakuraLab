@@ -9,11 +9,9 @@ material: Madera MDF ecológica con acabados de precisión en corte láser.
 
 dimensiones: 11 cm de largo x 8 cm de ancho x 5.5 cm de alto.
 
-categoria: Corte lazer
+categoria: corte-laser
 
-imagen: ../../assets/imgs/lazer_card.jpeg
-
-claseCSS: item-tall
+imagen: ../../assets/imgs/lazer-card/lazer_card.jpeg
 
 destacado: true
 ---

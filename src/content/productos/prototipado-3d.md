@@ -9,11 +9,9 @@ material: Estructura y paneles impresos en 3D con filamento PLA de alta calidad 
 
 dimensiones: 32 cm de alto x 16 cm de ancho x 16 cm de profundidad.
 
-categoria: Impresión 3D
+categoria: impresion-3d
 
-imagen: ../../assets/imgs/3d_card.jpeg
-
-claseCSS: item-large
+imagen: ../../assets/imgs/prototipado-3d/3d_card.jpeg
 
 destacado: true
 ---

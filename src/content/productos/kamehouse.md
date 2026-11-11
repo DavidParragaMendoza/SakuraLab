@@ -9,11 +9,9 @@ material: Madera MDF ecológica con acabados de precisión en corte láser.
 
 dimensiones: 22 cm de alto x 20 cm de ancho x 1.5 cm de grosor.
 
-categoria: Corte lazer
+categoria: corte-laser
 
-imagen: ../../assets/imgs/Kamehouse.png
-
-claseCSS: item-tall
+imagen: ../../assets/imgs/kamehouse/Kamehouse.png
 
 destacado: true
 ---
