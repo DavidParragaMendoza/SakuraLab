@@ -1,7 +1,7 @@
 ---
 titulo: Lámpara de Litofanía 3D Personalizada con Soporte de Luz Integrado
 categoria: mixto
-precio: 1050
+precio: 10.5
 imagen: ../../assets/imgs/litofania/imagen.jpg
 descripcion: >-
   Convierte tus recuerdos más preciados en una impresionante y única obra de
